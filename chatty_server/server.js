@@ -15,25 +15,46 @@ function broadcast(data) {
   })
 }
 
+let numUsers = 0;
+
+function sendNumUsers(socket) {
+  broadcast(JSON.stringify({
+    type: 'incomingNumUsers',
+    content: numUsers
+  }));
+}
+
 wss.on('connection', (socket) => {
+  numUsers++;
+  console.log('numUsers:', numUsers);
+  sendNumUsers();
+  
   socket.on('message', (data) => {
     console.log('New message', data);
-
+    
     var data = JSON.parse(data);
-
+    
     switch(data.type) {
       case 'postMessage':
-        data.type = 'incomingMessage';
-        break;
+      data.type = 'incomingMessage';
+      break;
       case 'postNotification':
-        data.type = 'incomingNotification';
-        break;
+      data.type = 'incomingNotification';
+      break;
       default:
-        console.error("Unknown event type:", data.type);
+      console.error("Unknown event type:", data.type);
     }
-
+    
     broadcast(JSON.stringify(data));
   })
+  
+  socket.on('close', () => {
+    console.log('connection closed');
+    numUsers--;
+    console.log('numUsers:', numUsers);
+    sendNumUsers();
+  })
+
 })
 
 server.listen(3001, function listening() {

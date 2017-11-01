@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
+import NavBar from './NavBar.jsx';
 
 // Generates a UUID:
 const uuidv4 = require('uuid/v4');
@@ -10,7 +11,8 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: {name: 'Bob'},
-      messages: [] // messages coming from server are stored here as they arrive
+      messages: [], // messages coming from server are stored here as they arrive
+      numUsers: 0
     }
     this.onNewPost = this.onNewPost.bind(this);
   }
@@ -30,19 +32,17 @@ class App extends Component {
       
       switch(newMessageObj.type) {
         case 'incomingMessage':
-          console.log('Incoming message:', newMessageObj);
-          //stuff
-          break;
         case 'incomingNotification':
-          console.log('Incoming notification:', newMessageObj);
-          //stuff
+          console.log('Incoming message/notification', newMessageObj);
+          this.setState({messages: this.state.messages.concat([newMessageObj]) });
+          break;
+        case 'incomingNumUsers':
+          console.log(newMessageObj.content);
+          this.setState({numUsers: newMessageObj.content});
           break;
         default:
-          //stuff
           console.error("Unknown event type:", newMessageObj.type);
       }
-
-      this.setState({messages: this.state.messages.concat([newMessageObj]) });
 
     }
   }
@@ -63,6 +63,9 @@ class App extends Component {
     console.log('Rendering <App />');
     return (
       <div>
+        <NavBar
+          numUsers={ this.state.numUsers }
+        />
         <MessageList
           messages={ this.state.messages }
         />

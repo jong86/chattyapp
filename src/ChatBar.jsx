@@ -3,16 +3,13 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       message: '',
       username: this.props.currentUser.name
     }
-
     this.onChangeMessage = this.onChangeMessage.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    
   }
 
   onChangeMessage(event) {
@@ -29,7 +26,6 @@ class ChatBar extends Component {
 
   onSubmit(event) {
     if (event.charCode === 13) {
-      console.log('from ChatBar component:', this.state.message, 'from:', this.state.username);
       this.props.onNewPost(this.state.message, this.state.username);
       this.setState({
         message: ''

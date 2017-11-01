@@ -3,21 +3,24 @@ import {Message, MessageSystem} from './Message.jsx';
 
 class MessageList extends Component {
   render() {
-    console.log("Rendering <MessageList />");
+    console.log('Rendering <MessageList />');
     const messages = this.props.messages.map(message => {
-      return <Message
-        key={ message.id }
-        username={ message.username } 
-        content={ message.message } 
+      return (
+        <Message
+          key={ message.id }
+          username={ message.username } 
+          content={ message.message } 
         />
-      });
-      <MessageSystem />
+      );
+    });
+
+    <MessageSystem />
       
     return (
-      <main className="messages">
+      <main className='messages'>
         { messages }
       </main>
-    )
+    );
   }
 }
 

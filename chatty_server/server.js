@@ -20,6 +20,8 @@ const wss = new SocketServer({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
 
+  console.log("Client connected.");
+
   ws.send("Connected to server");
 
 

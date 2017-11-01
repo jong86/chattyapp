@@ -16,13 +16,14 @@ class App extends Component {
     }
     
     this.socket = new WebSocket('ws://localhost:3001');
-
+    
     this.onNewPost = this.onNewPost.bind(this);
   }
-
+  
   componentDidMount() {
     this.socket.onmessage = (event) => {
-      console.log(event.data);
+      console.log("this.socket.onmessage:", JSON.parse(event.data));
+      this.state.messages.push(JSON.parse(event.data));
     };
   }
 

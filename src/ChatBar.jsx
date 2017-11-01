@@ -6,7 +6,7 @@ class ChatBar extends Component {
     this.state = {
       content: '',
       username: this.props.currentUser.name,
-      prevUsername: 'Anonymous'
+      prevUsername: undefined
     }
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -28,7 +28,7 @@ class ChatBar extends Component {
   onSubmit(event) {
     if (event.charCode === 13) {
 
-      if (this.state.username !== this.state.prevUsername) {
+      if (!!this.state.prevUsername && this.state.username !== this.state.prevUsername) {
         this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
       }
 

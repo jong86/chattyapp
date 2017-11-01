@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.socket.onmessage = function (event) {
+    this.socket.onmessage = (event) => {
       console.log(event.data);
     };
   }
@@ -47,6 +47,10 @@ class App extends Component {
         content: content
       };
       const messages = this.state.messages.concat(newMessage);
+
+      console.log("content before send:", content);
+
+      this.socket.send(JSON.stringify(newMessage));
 
       message_id++;
       this.setState({messages: messages});

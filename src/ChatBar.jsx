@@ -4,17 +4,18 @@ class ChatBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
-      username: this.props.currentUser.name
+      content: '',
+      username: this.props.currentUser.name,
+      prevUsername: 'Anonymous'
     }
-    this.onChangeMessage = this.onChangeMessage.bind(this);
+    this.onChangeContent = this.onChangeContent.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChangeMessage(event) {
+  onChangeContent(event) {
     this.setState({
-      message: event.target.value
+      content: event.target.value
     })
   }
 
@@ -26,9 +27,15 @@ class ChatBar extends Component {
 
   onSubmit(event) {
     if (event.charCode === 13) {
-      this.props.onNewPost(this.state.message, this.state.username);
+
+      if (this.state.username !== this.state.prevUsername) {
+        this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
+      }
+
+      this.props.onNewPost(this.state.content, this.state.username, 'postMessage');
       this.setState({
-        message: ''
+        content: '',
+        prevUsername: this.state.username
       })
     }
   }
@@ -47,8 +54,8 @@ class ChatBar extends Component {
           className='chatbar-message'
           placeholder='Type a message and hit ENTER'
           onKeyPress={ this.onSubmit }
-          onChange={ this.onChangeMessage }
-          value={ this.state.message }
+          onChange={ this.onChangeContent }
+          value={ this.state.content }
         />
       </footer>
     );

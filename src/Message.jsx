@@ -20,7 +20,7 @@ class MessageSystem extends Component {
     console.log("Rendering <Message />");
     return (
       <div className="message system">
-        Anonymous1 changed their name to nomnom.
+        { this.props.content }
       </div>
     );
   }

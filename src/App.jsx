@@ -16,26 +16,51 @@ class App extends Component {
   }
   
   componentDidMount() {
+    console.log('componentDidMount <App />')
+    
     this.socket = new WebSocket('ws://localhost:3001');
-    this.socket.addEventListener('message', event => {
+    
+    this.socket.onopen = (event) => {
+      console.log('Connected to server');
+    }
+
+
+    this.socket.onmessage = (event) => {
       const newMessageObj = JSON.parse(event.data);
+      
+      switch(newMessageObj.type) {
+        case 'incomingMessage':
+          console.log('Incoming message:', newMessageObj);
+          //stuff
+          break;
+        case 'incomingNotification':
+          console.log('Incoming notification:', newMessageObj);
+          //stuff
+          break;
+        default:
+          //stuff
+          console.error("Unknown event type:", newMessageObj.type);
+      }
+
       this.setState({messages: this.state.messages.concat([newMessageObj]) });
-    });
+
+    }
   }
 
-  onNewPost(message, username) {
+  onNewPost(content, username, type) {
     setTimeout(() => {
       const newMessageObj = {
         id: uuidv4(),
         username: username,
-        message: message
+        content: content,
+        type: type
       };
       this.socket.send(JSON.stringify(newMessageObj));
     }, 375);
   }
 
   render() {
-    console.log("Rendering <App />");
+    console.log('Rendering <App />');
     return (
       <div>
         <MessageList

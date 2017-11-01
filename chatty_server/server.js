@@ -18,7 +18,21 @@ function broadcast(data) {
 wss.on('connection', (socket) => {
   socket.on('message', (data) => {
     console.log('New message', data);
-    broadcast(data);
+
+    var data = JSON.parse(data);
+
+    switch(data.type) {
+      case 'postMessage':
+        data.type = 'incomingMessage';
+        break;
+      case 'postNotification':
+        data.type = 'incomingNotification';
+        break;
+      default:
+        console.error("Unknown event type:", data.type);
+    }
+
+    broadcast(JSON.stringify(data));
   })
 })
 

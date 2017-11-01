@@ -39,11 +39,9 @@ class App extends Component {
         username: username,
         message: message
       };
-      const messages = this.state.messages.concat(newMessageObj);
 
       this.socket.send(JSON.stringify(newMessageObj));
 
-      this.setState({messages: messages});
       
     }, 375);
   }

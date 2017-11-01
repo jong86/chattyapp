@@ -24,31 +24,25 @@ class App extends Component {
 
     this.socket.addEventListener('message', event => {
       const newMessageObj = JSON.parse(event.data);
-      console.log('socket message', newMessageObj);
 
       this.setState({messages: this.state.messages.concat([newMessageObj]) });
 
     });
   }
 
-  onNewPost(content) {
+  onNewPost(message, username) {
     
     setTimeout(() => {
 
-      console.log('Simulating incoming message');
-      
-      const newMessage = {
+      const newMessageObj = {
         id: uuidv4(),
-        username: 'Bob',
-        content: content
+        username: username,
+        message: message
       };
-      const messages = this.state.messages.concat(newMessage);
+      const messages = this.state.messages.concat(newMessageObj);
 
-      console.log("content before send:", content);
+      this.socket.send(JSON.stringify(newMessageObj));
 
-      this.socket.send(JSON.stringify(newMessage));
-
-      message_id++;
       this.setState({messages: messages});
       
     }, 375);
@@ -58,8 +52,13 @@ class App extends Component {
     console.log("Rendering <App />");
     return (
       <div>
-        <MessageList messages={ this.state.messages } />
-        <ChatBar currentUser={ this.state.currentUser } onNewPost={ this.onNewPost } />
+        <MessageList
+          messages={ this.state.messages }
+        />
+        <ChatBar
+          currentUser={ this.state.currentUser }
+          onNewPost={ this.onNewPost }
+        />
       </div>
     );
   }

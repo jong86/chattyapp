@@ -20,7 +20,7 @@ function broadcast(data) {
 wss.on('connection', (socket) => {
 
   socket.on('message', (data) => {
-    console.log(data);
+    console.log('New message', data);
     broadcast(data);
   })
 

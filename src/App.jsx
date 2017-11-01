@@ -26,9 +26,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = data;
+    this.socket = new WebSocket('ws://localhost:3001');
+
     this.onNewPost = this.onNewPost.bind(this);
   }
 
+  componentDidMount() {
+    this.socket.onmessage = function (event) {
+      console.log(event.data);
+    };
+  }
 
   onNewPost(content) {
     console.log('from App component:', content);
@@ -47,6 +54,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("Rendering <App />");
     return (
       <div>
         <MessageList messages={ this.state.messages } />

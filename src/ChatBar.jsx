@@ -35,6 +35,7 @@ class ChatBar extends Component {
   }
 
   render() {
+    console.log("Rendering <ChatBar />");
     return (
       <footer className="chatbar">
         <input className="chatbar-username" placeholder="Type you name here" onChange={ this.onContent } value={ this.props.currentUser.name } />

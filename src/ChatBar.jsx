@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import randomColor from './helpers.js';
+import randomColor from '../scripts/helpers.js';
 
 class ChatBar extends Component {
   constructor(props) {

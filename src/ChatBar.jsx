@@ -35,7 +35,7 @@ class ChatBar extends Component {
       if (!!this.state.prevUsername && this.state.username !== this.state.prevUsername) {
         this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
       }
-
+      
       this.props.onNewPost(this.state.content, this.state.username, 'postMessage', this.state.nameColor);
       this.setState({
         content: '',
@@ -43,12 +43,17 @@ class ChatBar extends Component {
       })
     }
   }
+  
+  onSubmitName() {
+    // Name change submission...
+    this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
+  }
 
   isSaveDisabled() {
     if (this.state.username === this.state.prevUsername) {
       return <button className='chatbar-savename' disabled>save</button>;
     } else {
-      return <button className='chatbar-savename'>save</button>;
+      return <button className='chatbar-savename' onClick=''>save</button>;
     }
   }
 

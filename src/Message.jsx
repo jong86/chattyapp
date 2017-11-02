@@ -20,7 +20,6 @@ function imageParser(content) {
     }
     return element;
   })
-
 }
 
 // https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg

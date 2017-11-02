@@ -36,13 +36,13 @@ wss.on('connection', (socket) => {
     
     switch(data.type) {
       case 'postMessage':
-      data.type = 'incomingMessage';
-      break;
+        data.type = 'incomingMessage';
+        break;
       case 'postNotification':
-      data.type = 'incomingNotification';
-      break;
+        data.type = 'incomingNotification';
+        break;
       default:
-      console.error("Unknown event type:", data.type);
+        console.error("Unknown event type:", data.type);
     }
     
     broadcast(JSON.stringify(data));

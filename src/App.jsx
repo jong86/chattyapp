@@ -47,13 +47,14 @@ class App extends Component {
     }
   }
 
-  onNewPost(content, username, type) {
+  onNewPost(content, username, type, nameColor) {
     setTimeout(() => {
       const newMessageObj = {
         id: uuidv4(),
-        username: username,
-        content: content,
-        type: type
+        username,
+        content,
+        type,
+        nameColor
       };
       this.socket.send(JSON.stringify(newMessageObj));
     }, 375);

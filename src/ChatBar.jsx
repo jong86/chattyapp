@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import randomColor from './helpers.js';
 
 class ChatBar extends Component {
   constructor(props) {
@@ -6,7 +7,8 @@ class ChatBar extends Component {
     this.state = {
       content: '',
       username: this.props.currentUser.name,
-      prevUsername: undefined
+      prevUsername: undefined,
+      nameColor: randomColor()
     }
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -32,7 +34,7 @@ class ChatBar extends Component {
         this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
       }
 
-      this.props.onNewPost(this.state.content, this.state.username, 'postMessage');
+      this.props.onNewPost(this.state.content, this.state.username, 'postMessage', this.state.nameColor);
       this.setState({
         content: '',
         prevUsername: this.state.username

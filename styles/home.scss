@@ -30,8 +30,15 @@ body {
   display: block;
   height: 40px;
   line-height: 40px;
-  margin: 5px;
   padding: 0 9px;
+}
+
+.chatbar-message {
+  margin: 5px;
+}
+
+.chatbar-username {
+  margin: 5px 0 5px 5px;
 }
 
 .chatbar-message {
@@ -40,6 +47,11 @@ body {
 
 .chatbar-username {
   flex: 2;
+}
+
+.chatbar-savename {
+  height: 40px;
+  align-self: center;
 }
 
 .message {

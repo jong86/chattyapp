@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: 'Bob'},
+      currentUser: {name: 'Anonymous'},
       messages: [], // messages coming from server are stored here as they arrive
       numUsers: 0
     }

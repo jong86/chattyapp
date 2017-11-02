@@ -42,6 +42,7 @@ class ChatBar extends Component {
     }
   }
 
+
   render() {
     console.log('Rendering <ChatBar />');
     return (

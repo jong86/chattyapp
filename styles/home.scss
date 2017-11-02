@@ -1,21 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
+$main-color: rgb(83, 149, 181);
+$txtnav-color: rgb(97, 162, 192);
+$chatbg-color: rgb(212, 215, 216);
+
 h1 {
-  color: tomato;
+  color: $txtnav-color;
+  margin: 0 5%;
+  font-size: 1.5em;
 }
 
 body {
-  background: white;
-  color: black;
-  font-family: 'Open Sans', sans-serif;
+  background: rgb(235, 235, 235);
+  color: $txtnav-color;
+  font-family: 'Verdana', sans-serif;
   font-size: 14px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: tomato;
-  border-top: 1px solid black;
+  background: $main-color;
+  border: 0;
   bottom: 0;
   display: flex;
   left: 0;
@@ -26,7 +32,8 @@ body {
 
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
+  border: 0;
+  border-radius: 8px;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -36,10 +43,12 @@ body {
 
 .chatbar-message {
   flex: 8;
+  background-color: $chatbg-color;
 }
 
 .chatbar-username {
   flex: 2;
+  background-color: $chatbg-color;
 }
 
 .message {
@@ -54,6 +63,7 @@ body {
 
 .message-content,
 .message-username {
+  color: black;
   overflow: hidden;
   margin: 5px;
   padding: 0 10px;
@@ -69,18 +79,20 @@ body {
 }
 
 .navbar {
-  background: tomato;
-  border-bottom: 1px solid black;
+  background: $main-color;
+  border: 0;
   height: 60px;
   left: 0;
   padding: 0 10px;
   position: fixed;
   right: 0;
   top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   span.num-users {
-    float: right;
-    color: black
+    color: $chatbg-color;
   }
 
 }
@@ -95,4 +107,8 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+}
+
+img {
+  width: 40%;
 }

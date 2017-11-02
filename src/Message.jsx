@@ -1,5 +1,29 @@
 import React, {Component} from 'react';
 
+const uuidv4 = require('uuid/v4');
+
+function imageParser(content) {
+  const re = /(https?:\/\/.*?\.(?:png|jpg|gif))/;
+  
+  let splitContent = content.split(re);
+
+  console.log('splitContent', splitContent);
+
+  return splitContent.map(element => {
+    if (re.test(element)) {
+      return (
+        <img
+          key={ uuidv4() }
+          src={ element }
+        />
+      );
+    }
+    return element;
+  })
+
+}
+
+// https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg
 
 class Message extends Component {
   render() {
@@ -13,7 +37,7 @@ class Message extends Component {
           { this.props.username }
         </span>
         <span className="message-content">
-          { this.props.content }
+          { imageParser(this.props.content) }
         </span>
       </div>
     );

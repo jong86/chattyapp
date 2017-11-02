@@ -4,11 +4,7 @@ const uuidv4 = require('uuid/v4');
 
 function imageParser(content) {
   const re = /(https?:\/\/.*?\.(?:png|jpg|gif))/;
-  
-  let splitContent = content.split(re);
-
-  console.log('splitContent', splitContent);
-
+  const splitContent = content.split(re);
   return splitContent.map(element => {
     if (re.test(element)) {
       return (
@@ -22,14 +18,11 @@ function imageParser(content) {
   })
 }
 
-// https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg
-
 class Message extends Component {
   render() {
     const usernameStyle = {
       color: this.props.nameColor
     }
-
     return (
       <div className="message">
         <span className="message-username" style={ usernameStyle }>
@@ -45,7 +38,6 @@ class Message extends Component {
 
 class MessageSystem extends Component {
   render() {
-    console.log("Rendering <Message />");
     return (
       <div className="message system">
         { this.props.content }

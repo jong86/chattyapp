@@ -18,32 +18,20 @@ class App extends Component {
   }
   
   componentDidMount() {
-    console.log('componentDidMount <App />')
-    
     this.socket = new WebSocket('ws://localhost:3001');
-    
-    this.socket.onopen = (event) => {
-      console.log('Connected to server');
-    }
-
-
     this.socket.onmessage = (event) => {
       const newMessageObj = JSON.parse(event.data);
-      
       switch(newMessageObj.type) {
         case 'incomingMessage':
         case 'incomingNotification':
-          console.log('Incoming message/notification', newMessageObj);
           this.setState({messages: this.state.messages.concat([newMessageObj]) });
           break;
         case 'incomingNumUsers':
-          console.log(newMessageObj.content);
           this.setState({numUsers: newMessageObj.content});
           break;
         default:
-          console.error("Unknown event type:", newMessageObj.type);
+          console.error('Unknown event type:', newMessageObj.type);
       }
-
     }
   }
 
@@ -61,7 +49,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('Rendering <App />');
     return (
       <div>
         <NavBar

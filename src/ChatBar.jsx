@@ -48,10 +48,12 @@ class ChatBar extends Component {
   }
   
   onSubmitName() {
-    this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification', '#000');
-    this.setState({
-      prevUsername: this.state.username
-    })
+    if (this.state.username !== this.state.prevUsername) {
+      this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification', '#000');
+      this.setState({
+        prevUsername: this.state.username
+      })
+    }
   }
 
   isSaveDisabled() {
@@ -72,7 +74,7 @@ class ChatBar extends Component {
           value={ this.state.username }
           onKeyPress={ this.checkIfEnterKey }
         />
-        {this.isSaveDisabled()}
+        { this.isSaveDisabled() }
         <input
           className='chatbar-message'
           placeholder='Type a message and hit ENTER'

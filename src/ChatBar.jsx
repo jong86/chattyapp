@@ -14,6 +14,8 @@ class ChatBar extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
+    this.checkIfEnterKey = this.checkIfEnterKey.bind(this);
+
     this.onSubmitName = this.onSubmitName.bind(this);
     this.isSaveDisabled = this.isSaveDisabled.bind(this);
   }
@@ -38,10 +40,14 @@ class ChatBar extends Component {
       })
     }
   }
+
+  checkIfEnterKey(event) {
+    if (event.charCode === 13) {
+      this.onSubmitName();
+    }
+  }
   
   onSubmitName() {
-    // Name change submission...
-    console.log('click');
     this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification', '#000');
     this.setState({
       prevUsername: this.state.username
@@ -64,6 +70,7 @@ class ChatBar extends Component {
           placeholder='Type your name here'
           onChange={ this.onChangeUsername }
           value={ this.state.username }
+          onKeyPress={ this.checkIfEnterKey }
         />
         {this.isSaveDisabled()}
         <input

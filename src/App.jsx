@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   onNewPost(content, username, type, nameColor) {
-    console.log('onNewPost called');
     setTimeout(() => {
       const newMessageObj = {
         id: uuidv4(),

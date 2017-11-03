@@ -1,7 +1,7 @@
 ## Chatty
 =====================
 
-Simple chat app using React and Websockets for Lighthouse Labs Bootcamp
+Simple real-time chat app using React and Websockets for Lighthouse Labs Bootcamp
 
 ![Screenshot](https://raw.githubusercontent.com/jong86/chattyapp/master/docs/Chatty%20screenshot.png)
 

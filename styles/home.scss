@@ -2,7 +2,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
 $main-color: rgb(83, 149, 181);
-$txtnav-color: rgb(97, 162, 192);
+$txtnav-color: rgb(144, 191, 211);
 $chatbg-color: rgb(212, 215, 216);
 
 h1 {
@@ -37,8 +37,15 @@ body {
   display: block;
   height: 40px;
   line-height: 40px;
-  margin: 5px;
   padding: 0 9px;
+}
+
+.chatbar-message {
+  margin: 5px;
+}
+
+.chatbar-username {
+  margin: 5px 0 5px 5px;
 }
 
 .chatbar-message {
@@ -49,6 +56,12 @@ body {
 .chatbar-username {
   flex: 2;
   background-color: $chatbg-color;
+  border-radius: 8px 0 0 8px;
+}
+
+.chatbar-savename {
+  height: 40px;
+  align-self: center;
 }
 
 .message {
@@ -111,4 +124,20 @@ body {
 
 img {
   width: 40%;
+}
+
+button {
+  border-radius: 0 8px 8px 0;
+  border-width: 0;
+  background-color:rgb(182, 182, 182);
+  color: rgb(72, 72, 72);
+
+  &:hover {
+    background-color: rgb(206, 206, 206);
+  }
+
+  &[disabled] {
+    background-color: rgb(174, 174, 174);
+    color: rgb(153, 153, 153);
+  }
 }

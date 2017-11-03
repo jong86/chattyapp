@@ -7,12 +7,15 @@ class ChatBar extends Component {
     this.state = {
       content: '',
       username: this.props.currentUser.name,
-      prevUsername: undefined,
+      prevUsername: 'Anonymous',
       nameColor: randomColor()
     }
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    
+    this.onSubmitName = this.onSubmitName.bind(this);
+    this.isSaveDisabled = this.isSaveDisabled.bind(this);
   }
 
   onChangeContent(event) {
@@ -29,16 +32,27 @@ class ChatBar extends Component {
 
   onSubmit(event) {
     if (event.charCode === 13) {
-
-      if (!!this.state.prevUsername && this.state.username !== this.state.prevUsername) {
-        this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification');
-      }
-
       this.props.onNewPost(this.state.content, this.state.username, 'postMessage', this.state.nameColor);
       this.setState({
-        content: '',
-        prevUsername: this.state.username
+        content: ''
       })
+    }
+  }
+  
+  onSubmitName() {
+    // Name change submission...
+    console.log('click');
+    this.props.onNewPost(`${this.state.prevUsername} has changed their name to ${this.state.username}`, null, 'postNotification', '#000');
+    this.setState({
+      prevUsername: this.state.username
+    })
+  }
+
+  isSaveDisabled() {
+    if (this.state.username === this.state.prevUsername) {
+      return <button className='chatbar-savename' disabled>save</button>;
+    } else {
+      return <button className='chatbar-savename' onClick={ this.onSubmitName }>save</button>;
     }
   }
 
@@ -47,10 +61,11 @@ class ChatBar extends Component {
       <footer className='chatbar'>
         <input 
           className='chatbar-username'
-          placeholder='Type you name here'
+          placeholder='Type your name here'
           onChange={ this.onChangeUsername }
           value={ this.state.username }
         />
+        {this.isSaveDisabled()}
         <input
           className='chatbar-message'
           placeholder='Type a message and hit ENTER'

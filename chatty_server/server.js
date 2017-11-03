@@ -33,6 +33,8 @@ wss.on('connection', (socket) => {
     console.log('New message', data);
     
     var data = JSON.parse(data);
+
+    if (data.username === '') data.username = 'Anonymous';
     
     switch(data.type) {
       case 'postMessage':

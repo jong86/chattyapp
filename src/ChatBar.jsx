@@ -11,11 +11,11 @@ class ChatBar extends Component {
       nameColor: randomColor()
     }
     this.onChangeContent = this.onChangeContent.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
+    
+    this.onChangeUsername = this.onChangeUsername.bind(this);
     this.checkIfEnterKey = this.checkIfEnterKey.bind(this);
-
     this.onSubmitName = this.onSubmitName.bind(this);
     this.isSaveDisabled = this.isSaveDisabled.bind(this);
   }
@@ -25,13 +25,7 @@ class ChatBar extends Component {
       content: event.target.value
     })
   }
-
-  onChangeUsername(event) {
-    this.setState({
-      username: event.target.value
-    })
-  }
-
+  
   onSubmit(event) {
     if (event.charCode === 13) {
       this.props.onNewPost(this.state.content, this.state.prevUsername, 'postMessage', this.state.nameColor);
@@ -40,11 +34,17 @@ class ChatBar extends Component {
       })
     }
   }
-
-  checkIfEnterKey(event) {
+  
+  checkIfEnterKey(event) { // For 'submitting' the new username
     if (event.charCode === 13) {
       this.onSubmitName();
     }
+  }
+
+  onChangeUsername(event) {
+    this.setState({
+      username: event.target.value
+    })
   }
   
   onSubmitName() {

@@ -10,9 +10,9 @@ Simple real-time chat app using React and Websockets for Lighthouse Labs Bootcam
 
 1. Clone repository
 2. `npm install` in main project folder
-3. `npm start` in main project folder
+3. `npm start` in main project folder (Webpack server)
 4. `npm install` in `chatty_server/` folder
-5. `npm run server` in `chatty_server/` folder (in another terminal)
+5. `npm start` in `chatty_server/` folder (Websockets server, in another terminal)
 6. Open `http://localhost:3000` in browser
 
 

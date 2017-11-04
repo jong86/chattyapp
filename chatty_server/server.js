@@ -15,8 +15,10 @@ function broadcast(data) {
   })
 }
 
+// To keep track of connected clients:
 let numUsers = 0;
 
+// Sends number of connected clients to client:
 function sendNumUsers(socket) {
   broadcast(JSON.stringify({
     type: 'incomingNumUsers',
@@ -26,16 +28,13 @@ function sendNumUsers(socket) {
 
 wss.on('connection', (socket) => {
   numUsers++;
-  console.log('numUsers:', numUsers);
   sendNumUsers();
   
   socket.on('message', (data) => {
-    console.log('New message', data);
-    
     var data = JSON.parse(data);
-
     if (data.username === '') data.username = 'Anonymous';
     
+    // Routing of messages from client:
     switch(data.type) {
       case 'postMessage':
         data.type = 'incomingMessage';
@@ -45,15 +44,12 @@ wss.on('connection', (socket) => {
         break;
       default:
         console.error("Unknown event type:", data.type);
+        
     }
-    
     broadcast(JSON.stringify(data));
   })
-  
   socket.on('close', () => {
-    console.log('connection closed');
     numUsers--;
-    console.log('numUsers:', numUsers);
     sendNumUsers();
   })
 
@@ -62,4 +58,3 @@ wss.on('connection', (socket) => {
 server.listen(3001, function listening() {
   console.log('Listening on %d', server.address().port);
 })
-

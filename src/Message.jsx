@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
+// Generate a unique ID for elements:
 const uuidv4 = require('uuid/v4');
 
+// To transform all urls that end in image file extensions into HTML img tags:
 function imageParser(content) {
-  const re = /(https?:\/\/.*?\.(?:png|jpg|gif))/;
+  const re = /(https?:\/\/.*?\.(?:png|jpe?g|gif))/;
   const splitContent = content.split(re);
   return splitContent.map(element => {
     if (re.test(element)) {
@@ -20,15 +22,15 @@ function imageParser(content) {
 
 class Message extends Component {
   render() {
-    const usernameStyle = {
+    const usernameStyle = { // For inline style insertion
       color: this.props.nameColor
     }
     return (
-      <div className="message">
-        <span className="message-username" style={ usernameStyle }>
+      <div className='message'>
+        <span className='message-username' style={ usernameStyle }>
           { this.props.username }
         </span>
-        <span className="message-content">
+        <span className='message-content'>
           { imageParser(this.props.content) }
         </span>
       </div>
@@ -39,7 +41,7 @@ class Message extends Component {
 class MessageSystem extends Component {
   render() {
     return (
-      <div className="message system">
+      <div className='message system'>
         { this.props.content }
       </div>
     );

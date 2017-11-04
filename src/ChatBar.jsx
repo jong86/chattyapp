@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import randomColor from '../scripts/helpers.js';
 
 class ChatBar extends Component {
@@ -10,15 +10,22 @@ class ChatBar extends Component {
       prevUsername: 'Anonymous',
       nameColor: randomColor()
     }
+
+    // Bindings for content input element:
     this.onChangeContent = this.onChangeContent.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
-    
+    // Bindings for username input element:
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.checkIfEnterKey = this.checkIfEnterKey.bind(this);
     this.onSubmitName = this.onSubmitName.bind(this);
     this.isSaveDisabled = this.isSaveDisabled.bind(this);
   }
+  
+
+  //
+  // Function declarations for content input element:
+  //
 
   onChangeContent(event) {
     this.setState({
@@ -35,6 +42,11 @@ class ChatBar extends Component {
     }
   }
   
+  
+  //
+  // Function declarations for username input element:
+  //
+
   checkIfEnterKey(event) { // For 'submitting' the new username
     if (event.charCode === 13) {
       this.onSubmitName();
@@ -56,13 +68,19 @@ class ChatBar extends Component {
     }
   }
 
-  isSaveDisabled() {
+  isSaveDisabled() { // Conditionally renders save username button depending on if username is changed
     if (this.state.username === this.state.prevUsername) {
       return <button className='chatbar-savename' disabled>save</button>;
     } else {
       return <button className='chatbar-savename' onClick={ this.onSubmitName }>save</button>;
     }
   }
+
+
+
+  //
+  //
+  //
 
   render() {
     return (

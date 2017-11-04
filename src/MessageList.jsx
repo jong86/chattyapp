@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Message, MessageSystem} from './Message.jsx';
+import React, { Component } from 'react';
+import { Message, MessageSystem } from './Message.jsx';
 
 class MessageList extends Component {
   render() {
     const messages = this.props.messages.map(message => {
-      if (message.type === 'incomingMessage') {
+      if (message.type === 'incomingMessage') { // Return a regular message with username and content
         return (
           <Message
             key={ message.id }
@@ -13,7 +13,7 @@ class MessageList extends Component {
             nameColor={ message.nameColor }
           />
         );
-      } else if (message.type === 'incomingNotification') {
+      } else if (message.type === 'incomingNotification') { // Return a notification of name change message
         return (
           <MessageSystem
             key={ message.id }

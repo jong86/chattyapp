@@ -34,7 +34,7 @@ class ChatBar extends Component {
 
   onSubmit(event) {
     if (event.charCode === 13) {
-      this.props.onNewPost(this.state.content, this.state.username, 'postMessage', this.state.nameColor);
+      this.props.onNewPost(this.state.content, this.state.prevUsername, 'postMessage', this.state.nameColor);
       this.setState({
         content: ''
       })
